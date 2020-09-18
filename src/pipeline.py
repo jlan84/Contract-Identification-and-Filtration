@@ -12,6 +12,7 @@ from wordcloud import WordCloud
 import numpy as np
 from collections import Counter
 import time
+import pandas as pd
 
 
 class ContractPipeline():
@@ -61,6 +62,10 @@ class ContractPipeline():
                 self.doc_text_lst.append(text)
                 self.target_lst.append(folder_lst[i])
                 self.individual_bag_o_words[folder_lst[i]].append(text.split())
+                lst = []
+        for val in self.target_lst:
+            lst.append(val.replace('_', ' '))
+        self.target_lst = lst
         
         end_time = time.time()
         print(f'This took {end_time-start_time:.2f} seconds')
@@ -103,6 +108,10 @@ class ContractPipeline():
                 self.doc_text_lst.append(text)
                 self.target_lst.append(folder_lst[i])
                 self.individual_bag_o_words[folder_lst[i]].append(text.split())
+        lst = []
+        for val in self.target_lst:
+            lst.append(val.replace('_', ' '))
+        self.target_lst = lst
 
         end_time = time.time()
         print(f'This took {end_time-start_time:.2f} seconds')
@@ -237,16 +246,16 @@ contractTxts/TrainTestHoldout/TrainDocs/'
 contractTxts/TrainTestHoldout/TestDocs/Commodities/'
     
     
-    # start = time.time()
-    # stop_words = stopwords.words('english')
-    # train_pipe = ContractPipeline(train_dir, stop_words)
-    # train_pipe.get_list_of_txts()
-    # train_pipe.remove_stop_words()
-    # train_pipe.tf_vect(train_pipe.stops_removed_str, max_features=2000)
-    # print(train_pipe.tfidf.shape)
-    # end = time.time()
-    # print(f'Time to run: {end - start:.2f}') 
-    a = np.array([[5,5],[4,4]])
-    b = np.array([[4],[4]])
-    a = np.append(a,b,1)
-    print(a)
+    start = time.time()
+    stop_words = stopwords.words('english')
+    train_pipe = ContractPipeline(train_dir, stop_words)
+    train_pipe.get_list_of_txts()
+    train_pipe.remove_stop_words()
+    # count_matrix, tfidf_matrix, cv = train_pipe.tf_idf_matrix(train_pipe.stops_removed_str, max_features=20)
+    train_pipe.tf_vect(train_pipe.stops_removed_str, max_features=20)
+    print(train_pipe.target_lst[:10])
+    
+    end = time.time()
+    print(f'Time to run: {end - start:.2f}') 
+    
+    
