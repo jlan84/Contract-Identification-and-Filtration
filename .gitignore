@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Other file types
+*.pkl
+*.doc
+*.txt
+*.pdf
