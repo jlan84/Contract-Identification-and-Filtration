@@ -133,3 +133,4 @@ dmypy.json
 *.doc
 *.txt
 *.pdf
+*.html
