@@ -153,16 +153,23 @@ contractTxts/TrainTestHoldout/TestDocs/'
                                           test_pipe.target_lst)     
     
     predictions = nb.nb_pipeline.predict(test_pipe.stops_removed_str)
-    actuals = train_pipe.target_lst
-    rows = np.array(actuals, predictions)
-    cols = ['True_Label', ['Predicted_Label']]
-    df = pd.DataFrame(rows, columns=cols)
-    df.to_csv('../data/predictions.csv')
+    
+    actuals = test_pipe.target_lst
+    
+    
+    
+    # cols = ['True_Label', 'Predicted_Label']
+    # d = {'True Label': actuals, 'Predicted Label': predictions}
+    # df = pd.DataFrame(d)
+    # df.to_csv('../data/predictions.csv')
     # fig, ax = plt.subplots(figsize=(12,12))
     # plt.rcParams.update({'font.size': 20})
     # nb.confusion_matrix_plot(test_pipe.stops_removed_str, test_pipe.target_lst, ax)
     # ax.set_xlabel('Predicted Label', fontsize=20)
     # ax.set_ylabel('True Label', fontsize=20)
+    # ax.set_title('Confusion Matrix', fontsize=30)
+    # plt.xticks(fontsize=16, rotation=70)
+    # plt.yticks(fontsize=16 )
     # plt.tight_layout()
     # plt.show()
     

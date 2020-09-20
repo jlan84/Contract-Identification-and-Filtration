@@ -22,7 +22,7 @@ font = {'family' : 'normal',
 
 matplotlib.rc('font', **font)
 
-plt.style.use('fivethirtyeight')
+plt.style.use('tableau-colorblind10')
 
 def make_sns_bar_plot(ax, cols, labels, title, color='blue', label=None):
     """
@@ -67,6 +67,7 @@ def make_bar_plot(ax, cols, labels, title, color='blue', label=None):
     ax.set_xticks(ticks=tick_loc)
     ax.set_xticklabels([str(x) for x in xlabel], rotation= 45, fontsize=14)
     ax.set_title(title, fontsize=20)
+
 
 def pad_dic_list(dic, pad):
     """
@@ -155,10 +156,37 @@ and {min_words}')
     plt.tight_layout()
     plt.show()
 
+def true_pos(row, col1, col2):
+    if row[col1] == row[col2]:
+        return 1
+    else:
+        return 0
+
+def true_neg(row, col1, col2):
+    if row[col1] != row[col2]:
+        return 1
+    else:
+        return 0
 
 
 
 execute = True
 if __name__ == "__main__" and execute:
-    
-   pass
+
+   df = pd.read_csv('../data/predictions.csv')
+   df.drop(columns='Unnamed: 0', inplace=True)
+   df['Correct'] = df.apply(lambda row: true_pos(row, 'True Label', 'Predicted Label'), axis=1)
+   df['Incorrect'] = df.apply(lambda row: true_neg(row, 'True Label', 'Predicted Label'), axis=1)
+   contract_group = df.groupby('True Label').sum().sort_values('Correct', ascending=True)
+   
+   contract_group.plot(kind='barh', stacked=True, figsize=(10,6), linewidth=1,
+                       align='center', width=.5, alpha=.7)
+   
+   plt.legend(loc='upper left', fontsize=16)
+   plt.tight_layout()
+   plt.xlabel('Predicted Count', fontsize=30, weight='bold')
+   plt.ylabel('Contract Class',fontsize=30, weight='bold')
+   plt.xticks(fontsize=16)
+   plt.yticks(fontsize=20)
+   plt.title('Predictions', fontsize=40, weight='bold')
+   plt.show()
