@@ -10,6 +10,18 @@ from directoryassistor import DirectoryAssistor
 
 def convert_to_img(directory, file_name, file_type='.pdf', dpi=500, 
                        verbose=True):
+         """
+        Converts each page in a file to an image
+
+        Params:
+        directory: str of the directory where the files are located must end in 
+        '/'
+        file_name: str name of the file
+        file_type:str default '.pdf'
+        dpi: int dots per inch
+        verbose: bool default is True
+        """
+
         if verbose:
             print(f'Processing {file_name}')
                
@@ -30,6 +42,14 @@ def convert_to_img(directory, file_name, file_type='.pdf', dpi=500,
         return image_names
         
 def ocr(img_name):
+
+    """
+    Takes an image in and returns a .txt file
+
+    Params:
+    img_name: str the name of the image to be read in
+    """
+
     out_dir = '/Users/justinlansdale/Documents/Galvanize/Capstone3/EC2Data/c\
 hangeFolder/Amended/'
 
@@ -42,6 +62,15 @@ hangeFolder/Amended/'
     return out_file
 
 def merge_pages(page_lst, out_dir, file_name):
+    """
+    Merges pages from the document into one .txt file
+
+    Params:
+    page_lst: lst of pages in the directory
+    out_dir: str dir where the pages are stored
+    file_name: str name of file
+    """
+
     main_txt = ''
     for page in page_lst:
         with open(out_dir+page, 'r') as f:
@@ -53,6 +82,20 @@ def merge_pages(page_lst, out_dir, file_name):
     
 
 def main(directory, file_name,out_dir, file_type='.pdf', dpi=500, verbose=True):
+    """
+    Walks through all the pages in a file, converts to image, and uses OCR to 
+    convert image to .txt files.  It then deletes the image files and merges the
+    individual page .txt files.  After it deletes the individual page .txt files
+
+    Params:
+    directory: str where the files are stored
+    file_name: str name of file
+    out_dir: str the directory where the text files are going
+    file_type:str default '.pdf'
+    dpi: int dots per inch
+    verbose: bool default is True
+    """
+    
     da = DirectoryAssistor()
     out_dir = out_dir
     image_list = convert_to_img(directory=directory, file_name=file_name)

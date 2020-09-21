@@ -75,8 +75,6 @@ class ImageConverter():
 
 if __name__ == '__main__':
     
-#     ds = DirectoryAssistor()
-    
     directory = '/Users/justinlansdale/Documents/Galvanize/Capstone2/\
 Contract-Classifier/data/CityofChicago/ChicagoContracts/'
 

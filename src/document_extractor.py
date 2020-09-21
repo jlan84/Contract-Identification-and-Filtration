@@ -55,6 +55,16 @@ class DocumentExtractor():
         return new_df, contract_dic 
     
     def scrape_pdf(self, directory, contract_dic):
+        """
+        Creates a directory from the key in the contract_dic and scrapes the 
+        documents from urls contained in the value list
+
+        Params:
+        directory: str directory where the files will be stored
+        contract_dic: dic with the key as the contract class and the value as a 
+        list of urls
+        """
+
         ds = DirectoryAssistor()
         count = 0
         for key, values in contract_dic.items():
@@ -80,7 +90,6 @@ class DocumentExtractor():
 
 
 if __name__ == "__main__":
-
     df = pd.read_csv('../data/CityofChicago/Contracts.csv', low_memory=False)
 
     de = DocumentExtractor(df)
@@ -111,9 +120,6 @@ if __name__ == "__main__":
     
     de.replace_col_values(contract_val_lst, contract_type_lst)
 
-    # for i in range(len(contract_type_lst)):
-    #     de.replace_col_values(contract_val_lst[i], contract_type_lst[i])
-    # # df.replace(pro_service, 'Prof_Services', inplace=True)
     de.process_df(['Contract PDF', 'Contract Type'])
     
     new_df, contract_dic = de.subset('Delegate_Agency', subset=5)
@@ -121,23 +127,7 @@ if __name__ == "__main__":
     directory = '/Users/justinlansdale/Documents/Galvanize/Capstone2/\
 Contract-Classifier/data/CityofChicago/ChicagoContracts/'
     de.scrape_pdf(directory, contract_dic)
-    # prefs = {"plugins.always_open_pdf_externally": True
-    #         }
-    
-    # options = webdriver.ChromeOptions()
-    
-    # options.add_experimental_option('prefs', prefs)
-    # # logging.basicConfig(level=logging.DEBUG)
-    # driver = webdriver.Chrome(chrome_options=options)
-    # driver.get('https://www.troweprice.com/content/dam/trowecorp/Pdfs/TRPIL%20MiFID%20II%20Execution%20Quality%20Report%202017.pdf')
 
-    # contract_type_group = (de.df.groupby('Contract Type').count().
-    # sort_values('Contract PDF', ascending=False))
-    # contract_type_group.reset_index(inplace=True)
-    # # delegate_grp = de.df[de.df['Contract Type'] == 'DELEGATE AGENCY']
-    # comp_trol_grp = de.df[de.df['Contract Type'] == 'COMPTROLLER-OTHER']
-    # print(comp_trol_grp['Contract PDF'].iloc[0])
-    # driver.page_source
     
     
 

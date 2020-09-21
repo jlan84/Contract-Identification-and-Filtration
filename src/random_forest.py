@@ -110,7 +110,11 @@ class RandomForest():
             print('Cannot lemmatize and stem')
     
     def add_nb_predictions(self):
-        
+        """
+        Uses the pickled nb model to add probabilities to the tfidf matrix for 
+        the random forest model
+        """
+
         print('Generating Predictions from NB Model')
 
         with open('nb_pickle.pkl', 'rb') as f:
@@ -139,6 +143,11 @@ class RandomForest():
                                    max_depth=None, norm='l2', use_idf=True,
                                    smooth_idf=True, verbose=True,
                                    random_state=None):
+        """
+        Generates a random forest model with with the default params from 
+        sklearn
+
+        """
         X_train = self.train_pipe.tfidf
         y_train = self.train_pipe.target_lst
 
@@ -157,6 +166,10 @@ class RandomForest():
         self.score = self.model.score(X_test, y_test)
                                         
     def grid_search(self):
+        """
+        Runs GridSearchCV to optimize the hyperparameters of the random forest
+        """
+
         self.model = RandomForestClassifier(random_state=123)
         params = {'n_estimators': [100,200],
                   'max_features': ['auto', 'sqrt', 'log2'],

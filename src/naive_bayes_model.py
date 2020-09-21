@@ -14,7 +14,16 @@ import matplotlib.pyplot as plt
 import time
 import pickle
 import scipy as sp
+import matplotlib.pyplot as plt
+import matplotlib
 
+font = {'family' : 'normal',
+        'weight' : 'bold',
+        'size'   : 12}
+
+matplotlib.rc('font', **font)
+
+plt.style.use('tableau-colorblind10')
 
 
 class NaiveBayes():
@@ -73,7 +82,8 @@ class NaiveBayes():
             
         
 
-    def get_accuracy_classification_report(self, train_docs, test_docs, test_targets):
+    def get_accuracy_classification_report(self, train_docs, test_docs, 
+                                           test_targets, ngram_range=(1,1)):
         """
         Prints out and returns the accuracy score from the prediction vs the actuals
         for the test set
@@ -86,7 +96,7 @@ class NaiveBayes():
         Returns
         Accuracy score for the model
         """
-        self.nb_pipeline = Pipeline([('vect', CountVectorizer()),
+        self.nb_pipeline = Pipeline([('vect', CountVectorizer(ngram_range=ngram_range)),
                             ('tfidf', TfidfTransformer()),
                             ('model', MultinomialNB()),
                             ])
@@ -139,7 +149,7 @@ contractTxts/TrainTestHoldout/TestDocs/'
     train_pipe.remove_stop_words()
     test_pipe.remove_stop_words()
 
-    train_pipe.tf_vect(train_pipe.stops_removed_str, max_features=2000)
+    train_pipe.ngram_tf_vect(train_pipe.stops_removed_str, max_features=2000, ngram_range=(3,3))
 
     count_matrix, tfidf_matrix, cv = (train_pipe.tf_idf_matrix(train_pipe.
                                                                stops_removed_str,
@@ -147,35 +157,44 @@ contractTxts/TrainTestHoldout/TestDocs/'
     
     nb = NaiveBayes(train_pipe.target_lst, train_pipe.tfidf, cv)
     nb.naive_bayes_model()
-    nb.return_top_n_words(n=7)
+    nb.return_top_n_words(n=4)
+
     nb.get_accuracy_classification_report(train_pipe.stops_removed_str,
                                           test_pipe.stops_removed_str,
-                                          test_pipe.target_lst)     
+                                          test_pipe.target_lst, ngram_range=(4,4))
     
-    predictions = nb.nb_pipeline.predict(test_pipe.stops_removed_str)
+    ngrams = []
+    max_grams = 7
+    y = []
+    x = np.arange(1, max_grams+1, step=1)
     
-    actuals = test_pipe.target_lst
+    for i in range(1, max_grams+1):
+        ngrams.append((i,i))
     
+    for ngram in ngrams:
+        print(f'Generating nb model with {ngram} range')
+        nb.get_accuracy_classification_report(train_pipe.stops_removed_str,
+                                          test_pipe.stops_removed_str,
+                                          test_pipe.target_lst, ngram_range=ngram)     
+        y.append(nb.accuracy)
     
+
+
+
+    fig, ax = plt.subplots(figsize=(12,12))
+    plt.rcParams.update({'font.size': 20})
+    nb.confusion_matrix_plot(test_pipe.stops_removed_str, test_pipe.target_lst, ax)
+    ax.set_xlabel('Predicted Label', fontsize=20, weight='bold')
+    ax.set_ylabel('True Label', fontsize=20, weight='bold')
+    ax.set_title('Confusion Matrix', fontsize=30, weight='bold')
+    plt.xticks(fontsize=16, rotation=70, weight='bold')
+    plt.yticks(fontsize=16, weight='bold')
+    plt.tight_layout()
+    plt.show()
     
-    # cols = ['True_Label', 'Predicted_Label']
-    # d = {'True Label': actuals, 'Predicted Label': predictions}
-    # df = pd.DataFrame(d)
-    # df.to_csv('../data/predictions.csv')
-    # fig, ax = plt.subplots(figsize=(12,12))
-    # plt.rcParams.update({'font.size': 20})
-    # nb.confusion_matrix_plot(test_pipe.stops_removed_str, test_pipe.target_lst, ax)
-    # ax.set_xlabel('Predicted Label', fontsize=20)
-    # ax.set_ylabel('True Label', fontsize=20)
-    # ax.set_title('Confusion Matrix', fontsize=30)
-    # plt.xticks(fontsize=16, rotation=70)
-    # plt.yticks(fontsize=16 )
-    # plt.tight_layout()
-    # plt.show()
-    
-    # print(nb.class_report)
-    # end = time.time()
-    # print(f'This took {end-start:.2f}')
+    print(nb.class_report)
+    end = time.time()
+    print(f'This took {end-start:.2f}')
 
 
 

@@ -171,6 +171,7 @@ execute = True
 if __name__ == "__main__" and execute:
     
     # Train Test Holdout Test on txt files
+    
     old_path = '/Users/justinlansdale/Documents/Galvanize/Capstone2/\
 EC2Data/txtFiles/'
     new_path = '/Users/justinlansdale/Documents/Galvanize/Capstone2/\

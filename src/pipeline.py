@@ -236,7 +236,23 @@ class ContractPipeline():
         
         end_time = time.time()
         print(f'This took {end_time-start_time:.2f} seconds')
+    
+    def ngram_tf_vect(self, documents, max_features=None, ngram_range=(1,1)):
+        """
+        Returns tf-idf matrix from documents
+        
+        Prams
+        documents: list of strings
+        """
+        print('Generating tfidf')
+        start_time = time.time()
 
+        self.vect = TfidfVectorizer(max_features=max_features,
+                                    ngram_range=ngram_range)
+        self.tfidf = self.vect.fit_transform(documents)
+        
+        end_time = time.time()
+        print(f'This took {end_time-start_time:.2f} seconds')
 
 if __name__ == "__main__":
 
@@ -252,8 +268,10 @@ contractTxts/TrainTestHoldout/TestDocs/Commodities/'
     train_pipe.get_list_of_txts()
     train_pipe.remove_stop_words()
     # count_matrix, tfidf_matrix, cv = train_pipe.tf_idf_matrix(train_pipe.stops_removed_str, max_features=20)
-    train_pipe.tf_vect(train_pipe.stops_removed_str, max_features=20)
-    print(train_pipe.target_lst[:10])
+    train_pipe.ngram_tf_vect(train_pipe.stops_removed_str, max_features=2000, ngram_range=(1,1))
+    print(train_pipe.tfidf.shape)
+    print(train_pipe.tfidf.toarray()[:10])
+    # print(train_pipe.vect.get_feature_names()[:10])
     
     end = time.time()
     print(f'Time to run: {end - start:.2f}') 

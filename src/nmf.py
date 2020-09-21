@@ -93,6 +93,14 @@ class NMFModel():
 
 
     def generate_model(self, n_components=None, alpha=0.1, l1_ratio=0.5):
+        """
+        Generates an NMF model with the default parms
+
+        Params:
+        n_components: int defualt none
+        alpha: float default 0.1
+        l1_ratio: float default 0.5
+        """
         
         X = self.pipe.tfidf
         self.model = NMF(n_components=n_components, random_state=123,
@@ -102,7 +110,16 @@ class NMFModel():
         self.H = self.model.components_
     
     def error_optimization(self, n_components_lst, ax, alpha=0.1, l1_ratio=0.5):
-        
+        """
+        Generates a graph with the reconstruction error for the yaxis and the
+        n_compontents_lst for the xaxis
+
+        Params:
+        n_components_lst: a list of integers for n_components
+        ax: axes to be used
+        alpha: float default 0.1
+        l1_ratio: float default 0.5
+        """
         X = self.pipe.tfidf
         error_lst = []
         for components in n_components_lst:
@@ -118,6 +135,13 @@ class NMFModel():
         plt.show()
 
     def print_top_words(self, n_top_words=20):
+        """
+        Prints the top words for each latent topic
+
+        Params:
+        n_top_words: the number of words to be printed
+        """
+        
         for topic_idx, topic in enumerate(self.model.components_):
             message = "Topic #%d: " % topic_idx
             message += " ".join([self.pipe.vect.get_feature_names()[i]
@@ -138,18 +162,18 @@ EC2Data/txtFiles/'
     nmf.remove_stop_words()
     nmf.tfidf(max_features=3000)
     nmf.generate_model(n_components=k)
-    # nmf.print_top_words()
-    # fig, ax = plt.subplots(figsize=(10,8))
-    # n_components_lst = [4, 8, 10, 12, 14, 16, 18]
-    # nmf.error_optimization(n_components_lst, ax)
+    nmf.print_top_words()
+    fig, ax = plt.subplots(figsize=(10,8))
+    n_components_lst = [4, 8, 10, 12, 14, 16, 18]
+    nmf.error_optimization(n_components_lst, ax)
     
-    # print(nmf.model.reconstruction_err_)
+    print(nmf.model.reconstruction_err_)
     
-    # topics = ['Latent_Topic_{}'.format(i) for i in range(18)]
-    # contracts = ['Arch_Engineering', 'Commodities', 'Comptroller', 'Construction',
-    #              'Delegate_Agency', 'Prof_Services']
-    # df = pd.DataFrame(nmf.W, index=contracts, columns=topics)
-    # df.to_csv('../data/')
+    topics = ['Latent_Topic_{}'.format(i) for i in range(18)]
+    contracts = ['Arch_Engineering', 'Commodities', 'Comptroller', 'Construction',
+                 'Delegate_Agency', 'Prof_Services']
+    df = pd.DataFrame(nmf.W, index=contracts, columns=topics)
+    df.to_csv('../data/')
     
     print(nmf.W[:10])
     

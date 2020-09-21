@@ -190,3 +190,16 @@ if __name__ == "__main__" and execute:
    plt.yticks(fontsize=20)
    plt.title('Predictions', fontsize=40, weight='bold')
    plt.show()
+
+    x = np.arange(1,8, step=1)
+    y = [0.862,0.894,0.894,0.901,0.901,.9,.898]
+
+    fig, ax = plt.subplots(figsize=(8,8))
+    ax.plot(x,y)
+    ax.set_title('Optimization Plot', fontsize=40, weight='bold')
+    plt.xlabel('# of Words', fontsize=30, weight='bold')
+    plt.ylabel('Accuracy',fontsize=30, weight='bold')
+    plt.xticks(fontsize=16)
+    plt.yticks(fontsize=20)
+    plt.tight_layout()
+    plt.show()

@@ -8,7 +8,19 @@ class AmendmentDetector():
 
     def __init__(self, original_doc_dir, amended_doc_dir, original_txt_dir,
                  amended_txt_dir):
-    
+        """
+        Instantiates the amendment detection class
+        
+        Params:
+
+        original_doc_dir: str directory where the original document is located
+        amended_doc_dir: str directory where the amended document is located
+        original_txt_dir: str directory where the original txt file will be 
+        storeed
+        amended_txt_dir: str directory where the amended txt file will be 
+        stored
+        """
+
         self.original_doc_dir = original_doc_dir
         self.amended_doc_dir = amended_doc_dir
         self.original_txt_dir = original_txt_dir
@@ -16,6 +28,10 @@ class AmendmentDetector():
         self.da = DirectoryAssistor()
 
     def convert_original_to_txt(self):
+        """
+        Converts original doct to .txt file
+        """
+
         doc_lst = self.da.create_content_list(self.original_doc_dir)
 
         for i in range(len(doc_lst)):
@@ -26,6 +42,9 @@ class AmendmentDetector():
                 continue
     
     def convert_amended_to_txt(self):
+        """
+        Converts amended doc to .txt file
+        """
         doc_lst = self.da.create_content_list(self.amended_doc_dir)
 
         for i in range(len(doc_lst)):
@@ -36,6 +55,10 @@ class AmendmentDetector():
                 continue
     
     def read_in_files(self):
+        """
+        Reads in txt files
+        """
+
         original_lst = self.da.create_content_list(self.original_txt_dir)
         amended_lst = self.da.create_content_list(self.amended_txt_dir)
         for doc in original_lst:
@@ -53,6 +76,10 @@ class AmendmentDetector():
                 continue
     
     def print_changes(self):
+        """
+        Prints changes made in the amended document
+        """
+
         original_lst = self.original.split()
         amended_lst = self.amended.split()
         original_value = []
@@ -68,6 +95,7 @@ class AmendmentDetector():
             print(f'\n Change # {i+1}: {original_value[i]} changed to \
 {amended_value[i]} \n \n Reference text: {" ".join(change_ref[i])} \n')
 
+    
 
         
 
@@ -93,4 +121,3 @@ changeFolder/Amended/'
     ad.read_in_files()
     ad.print_changes()
     
-    # ad.convert_original_to_txt()
