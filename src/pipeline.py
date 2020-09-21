@@ -267,11 +267,9 @@ contractTxts/TrainTestHoldout/TestDocs/Commodities/'
     train_pipe = ContractPipeline(train_dir, stop_words)
     train_pipe.get_list_of_txts()
     train_pipe.remove_stop_words()
-    # count_matrix, tfidf_matrix, cv = train_pipe.tf_idf_matrix(train_pipe.stops_removed_str, max_features=20)
+    
     train_pipe.ngram_tf_vect(train_pipe.stops_removed_str, max_features=2000, ngram_range=(1,1))
-    print(train_pipe.tfidf.shape)
-    print(train_pipe.tfidf.toarray()[:10])
-    # print(train_pipe.vect.get_feature_names()[:10])
+    
     
     end = time.time()
     print(f'Time to run: {end - start:.2f}') 
