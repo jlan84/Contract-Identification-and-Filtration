@@ -97,8 +97,13 @@ I started off by using a Naive Bayes Classifier model.  The initial model, using
 </br>
 </br>
 
-Below is the confusion matrix generated from the 4-word model.
+Below is the confusion matrix and a bar graph showing predictions generated from the 4-word model.
 </br>
 <p align="center">
 <img src="images/chicago_confusion_whole_set.png"  height="700" width="700" />
+</p>
+</br>
+</br>
+<p align="center">
+<img src="images/true_pos_barplot.png"  height="400" width="800" />
 </p>
