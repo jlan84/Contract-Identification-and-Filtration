@@ -215,8 +215,7 @@ contractTxts/TrainTestHoldout/TestDocs/'
     # rf.grid_search()
     # print(rf.best_params)
     rf.create_random_forest_model(n_estimators=200, max_depth=15, random_state=123)
-    # # print(rf.prediction[:10])
-    # # print(rf.test_pipe.target_lst[:10])
+
     print(rf.score)
     end_time = time.time()
     print(f'This took {end_time-start_time:.2f} seconds')

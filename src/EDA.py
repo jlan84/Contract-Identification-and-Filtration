@@ -7,7 +7,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 import textract
-from webscraper import WebScraper
 import pandas as pd
 from nltk.corpus import stopwords
 from sifter import ContractSifter
@@ -15,6 +14,7 @@ from pipeline import ContractPipeline
 import pandas as pd
 import scipy.stats as stats
 import matplotlib
+from sklearn.preprocessing import normalize
 
 font = {'family' : 'normal',
         'weight' : 'bold',
@@ -43,7 +43,8 @@ def make_sns_bar_plot(ax, cols, labels, title, color='blue', label=None):
     xlabel = labels
     sns.barplot(tick_loc, cols, color=color, ax=ax, label=label)
     ax.set_xticks(ticks=tick_loc)
-    ax.set_xticklabels([str(x) for x in xlabel], rotation= 45, fontsize=14, horizontalalignment='right')
+    ax.set_xticklabels([str(x) for x in xlabel], rotation= 45, fontsize=14, 
+                        horizontalalignment='right')
     ax.set_title(title, fontsize=20)
 
 def make_bar_plot(ax, cols, labels, title, color='blue', label=None):
@@ -173,7 +174,7 @@ def true_neg(row, col1, col2):
 execute = True
 if __name__ == "__main__" and execute:
 
-   df = pd.read_csv('../data/predictions.csv')
+   df = pd.read_csv('../data/optimized_predictions.csv')
    df.drop(columns='Unnamed: 0', inplace=True)
    df['Correct'] = df.apply(lambda row: true_pos(row, 'True Label', 'Predicted Label'), axis=1)
    df['Incorrect'] = df.apply(lambda row: true_neg(row, 'True Label', 'Predicted Label'), axis=1)
@@ -182,24 +183,31 @@ if __name__ == "__main__" and execute:
    contract_group.plot(kind='barh', stacked=True, figsize=(10,6), linewidth=1,
                        align='center', width=.5, alpha=.7)
    
-   plt.legend(loc='upper left', fontsize=16)
+   plt.legend(bbox_to_anchor=(.8,1.01), fontsize=25)
    plt.tight_layout()
    plt.xlabel('Predicted Count', fontsize=30, weight='bold')
-   plt.ylabel('Contract Class',fontsize=30, weight='bold')
-   plt.xticks(fontsize=16)
-   plt.yticks(fontsize=20)
+#    plt.ylabel('Contract Class',fontsize=30, weight='bold')
+   ax1 = plt.axes()
+   y_axis = ax1.yaxis
+   y_axis.label.set_visible(False)
+#    y_axis = plt.axes.get_yaxis()
+#    y_label = y_axis.get_label()
+   plt.xticks(fontsize=30, weight="bold")
+   plt.yticks(fontsize=30, weight="bold")
    plt.title('Predictions', fontsize=40, weight='bold')
    plt.show()
 
-    x = np.arange(1,8, step=1)
-    y = [0.862,0.894,0.894,0.901,0.901,.9,.898]
+    # x = np.arange(1,8, step=1)
+    # y = [0.862,0.894,0.894,0.901,0.901,.9,.898]
 
-    fig, ax = plt.subplots(figsize=(8,8))
-    ax.plot(x,y)
-    ax.set_title('Optimization Plot', fontsize=40, weight='bold')
-    plt.xlabel('# of Words', fontsize=30, weight='bold')
-    plt.ylabel('Accuracy',fontsize=30, weight='bold')
-    plt.xticks(fontsize=16)
-    plt.yticks(fontsize=20)
-    plt.tight_layout()
-    plt.show()
+    # fig, ax = plt.subplots(figsize=(8,8))
+    # ax.plot(x,y)
+    # ax.set_title('Optimization Plot', fontsize=40, weight='bold')
+    # plt.xlabel('# of Words', fontsize=30, weight='bold')
+    # plt.ylabel('Accuracy',fontsize=30, weight='bold')
+    # plt.xticks(fontsize=16)
+    # plt.yticks(fontsize=20)
+    # plt.tight_layout()
+    # plt.show()
+
+    

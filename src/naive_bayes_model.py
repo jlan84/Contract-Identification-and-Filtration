@@ -163,34 +163,44 @@ contractTxts/TrainTestHoldout/TestDocs/'
                                           test_pipe.stops_removed_str,
                                           test_pipe.target_lst, ngram_range=(4,4))
     
-    ngrams = []
-    max_grams = 7
-    y = []
-    x = np.arange(1, max_grams+1, step=1)
     
-    for i in range(1, max_grams+1):
-        ngrams.append((i,i))
+    d = {'True Label': test_pipe.target_lst, 
+        'Predicted Label': nb.nb_pipeline.predict(test_pipe.stops_removed_str)}
     
-    for ngram in ngrams:
-        print(f'Generating nb model with {ngram} range')
-        nb.get_accuracy_classification_report(train_pipe.stops_removed_str,
-                                          test_pipe.stops_removed_str,
-                                          test_pipe.target_lst, ngram_range=ngram)     
-        y.append(nb.accuracy)
+    df = pd.DataFrame(d)
+    df.to_csv('../data/optimized_predictions.csv')
+
+
+
+
+    # ngrams = []
+    # max_grams = 7
+    # y = []
+    # x = np.arange(1, max_grams+1, step=1)
+    
+    # for i in range(1, max_grams+1):
+    #     ngrams.append((i,i))
+    
+    # for ngram in ngrams:
+    #     print(f'Generating nb model with {ngram} range')
+    #     nb.get_accuracy_classification_report(train_pipe.stops_removed_str,
+    #                                       test_pipe.stops_removed_str,
+    #                                       test_pipe.target_lst, ngram_range=ngram)     
+    #     y.append(nb.accuracy)
     
 
 
 
-    fig, ax = plt.subplots(figsize=(12,12))
-    plt.rcParams.update({'font.size': 20})
-    nb.confusion_matrix_plot(test_pipe.stops_removed_str, test_pipe.target_lst, ax)
-    ax.set_xlabel('Predicted Label', fontsize=20, weight='bold')
-    ax.set_ylabel('True Label', fontsize=20, weight='bold')
-    ax.set_title('Confusion Matrix', fontsize=30, weight='bold')
-    plt.xticks(fontsize=16, rotation=70, weight='bold')
-    plt.yticks(fontsize=16, weight='bold')
-    plt.tight_layout()
-    plt.show()
+    # fig, ax = plt.subplots(figsize=(12,12))
+    # plt.rcParams.update({'font.size': 20})
+    # nb.confusion_matrix_plot(test_pipe.stops_removed_str, test_pipe.target_lst, ax)
+    # ax.set_xlabel('Predicted Label', fontsize=20, weight='bold')
+    # ax.set_ylabel('True Label', fontsize=20, weight='bold')
+    # ax.set_title('Confusion Matrix', fontsize=30, weight='bold')
+    # plt.xticks(fontsize=16, rotation=70, weight='bold')
+    # plt.yticks(fontsize=16, weight='bold')
+    # plt.tight_layout()
+    # plt.show()
     
     print(nb.class_report)
     end = time.time()

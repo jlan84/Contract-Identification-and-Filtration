@@ -185,9 +185,12 @@ class ContractPipeline():
         snowball = SnowballStemmer('english')
         wordnet = WordNetLemmatizer()
         
-        porter_lst= [[porter.stem(w) for w in words] for words in self.stops_removed_lst]
-        snowball_lst= [[snowball.stem(w) for w in words] for words in self.stops_removed_lst]
-        wordnet_lst= [[wordnet.lemmatize(w) for w in words] for words in self.stops_removed_lst]
+        porter_lst= [[porter.stem(w) for w in words] for words in 
+                      self.stops_removed_lst]
+        snowball_lst= [[snowball.stem(w) for w in words] for words in 
+                        self.stops_removed_lst]
+        wordnet_lst= [[wordnet.lemmatize(w) for w in words] for words in 
+                       self.stops_removed_lst]
         
         self.porter_str = self.join_list_of_strings(porter_lst)
         self.snowball_str = self.join_list_of_strings(snowball_lst)
@@ -196,7 +199,7 @@ class ContractPipeline():
         end_time = time.time()
         print(f'This took {end_time-start_time:.2f} seconds')
 
-    def tf_idf_matrix(self, documents, max_features=None):
+    def count_vectorizer(self, max_features=None, ngram_range=(1,1)):
         """
         Sets up a word count matrix, a tfidf matrix, and a CountVectorizer for
         the documents in the directory
@@ -212,16 +215,13 @@ class ContractPipeline():
         print('Generating tfidf and count matrix')
         start_time = time.time()
 
-        cv = CountVectorizer(max_features=max_features)
-        count_matrix = cv.fit_transform(documents)
-        tfidf_transformer = TfidfTransformer()
-        tfidf_matrix = tfidf_transformer.fit_transform(count_matrix)
+        self.cv = CountVectorizer(max_features=max_features, ngram_range=ngram_range)
+        self.tf_matrix = self.cv.fit_transform(self.stops_removed_str)
         
         end_time = time.time()
         print(f'This took {end_time-start_time:.2f} seconds')
-        return count_matrix, tfidf_matrix, cv
 
-    def tf_vect(self, documents, max_features=None):
+    def tf_vect(self, documents, max_features=None, ngram_range=(1,1)):
         """
         Returns tf-idf matrix from documents
         
@@ -231,29 +231,13 @@ class ContractPipeline():
         print('Generating tfidf')
         start_time = time.time()
 
-        self.vect = TfidfVectorizer(max_features=max_features)
-        self.tfidf = self.vect.fit_transform(documents)
-        
-        end_time = time.time()
-        print(f'This took {end_time-start_time:.2f} seconds')
-    
-    def ngram_tf_vect(self, documents, max_features=None, ngram_range=(1,1)):
-        """
-        Returns tf-idf matrix from documents
-        
-        Prams
-        documents: list of strings
-        """
-        print('Generating tfidf')
-        start_time = time.time()
-
-        self.vect = TfidfVectorizer(max_features=max_features,
+        self.vect = TfidfVectorizer(max_features=max_features, 
                                     ngram_range=ngram_range)
         self.tfidf = self.vect.fit_transform(documents)
         
         end_time = time.time()
         print(f'This took {end_time-start_time:.2f} seconds')
-
+    
 if __name__ == "__main__":
 
     train_dir = '/Users/justinlansdale/Documents/Galvanize/Capstone2/\
@@ -267,8 +251,10 @@ contractTxts/TrainTestHoldout/TestDocs/Commodities/'
     train_pipe = ContractPipeline(train_dir, stop_words)
     train_pipe.get_list_of_txts()
     train_pipe.remove_stop_words()
+    train_pipe.word_condenser()
     
-    train_pipe.ngram_tf_vect(train_pipe.stops_removed_str, max_features=2000, ngram_range=(1,1))
+    train_pipe.tf_vect(train_pipe.stops_removed_str, max_features=2000, 
+    ngram_range=(1,1))
     
     
     end = time.time()
