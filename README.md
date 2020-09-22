@@ -1,5 +1,5 @@
 <p align="center">
-<img src="images/Coffee_and_Contracts.png"  height="100" width="500" />
+<img src="images/coffee_and_contracts.png"  height="100" width="500" />
 </p>
 
 
@@ -13,7 +13,15 @@
 
 ## Introduction
 
-For normal everyday people, reading contracts is not the most appealing endeavor and we deal with them on a regular basis.  Whether it's agreeing to a new update on your smart phone or signing all of the documents when closing on a new home, few of us actually read through the contract to ensure we are not signing our lives away.  The ultimate goal of this project is to distinguish the important parts of a contract from the rest.  The first part of the project focuses on classifying a contract based on word content using NLP (Natural Language Processing).
+For normal everyday people, reading contracts is not the most appealing endeavor and we deal with them on a regular basis.  Whether it's agreeing to a new update on your smart phone or signing all of the documents when closing on a new home, few of us actually read through the contract to ensure we are not signing our lives away.  The ultimate goal of this project is to distinguish the important parts of a contract from the rest.
+
+## Process
+
+<p align="center">
+<img src="images/work_flow.png"  height="100" width="500" />
+</p>
+
+
 
 ## The Contracts
 
