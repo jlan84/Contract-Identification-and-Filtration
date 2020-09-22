@@ -103,7 +103,6 @@ Below is the confusion matrix and a bar graph showing predictions generated from
 <img src="images/chicago_confusion_whole_set.png"  height="700" width="700" />
 </p>
 </br>
-</br>
 <p align="center">
 <img src="images/true_pos_barplot.png"  height="500" width="900" />
 </p>
