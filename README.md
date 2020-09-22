@@ -105,5 +105,5 @@ Below is the confusion matrix and a bar graph showing predictions generated from
 </br>
 </br>
 <p align="center">
-<img src="images/true_pos_barplot.png"  height="400" width="800" />
+<img src="images/true_pos_barplot.png"  height="500" width="900" />
 </p>
