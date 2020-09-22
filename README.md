@@ -54,7 +54,13 @@ OCR is computationally expensive so in order to optimize my time, I used cloud c
 
 ### Generating the models
 
-In order to generate the models, I needed to perform a proper train-test-split, stratifying the text files from each class evenly. 
+In order to generate the models, I needed to perform a proper train-test-split, stratifying the text files from each class evenly, utilizing the folders as class names and generating new folders for the train, validate, and holdout sets.  The workflow for this is highlighted below.
+
+<p align="center">
+<img src="images/train_test_split_workflow.png"  height="400" width="700" />
+</p>
+
+
 ## The Contracts
 
 Contracts are typically private documents and therefore obtaining enough contracts to genereate a model was no easy task.  
