@@ -277,17 +277,17 @@ contractTxts/TrainTestHoldout/TestDocs/'
     nb.naive_bayes_model()
     nb.return_top_n_words()
     nb.get_accuracy_classification_report(ngram_range=(4,4))
-    
-    fig, ax = plt.subplots(figsize=(12,12))
-    plt.rcParams.update({'font.size': 20})
-    nb.confusion_matrix_plot(ax)
-    ax.set_xlabel('Predicted Label', fontsize=20, weight='bold')
-    ax.set_ylabel('True Label', fontsize=20, weight='bold')
-    ax.set_title('Confusion Matrix', fontsize=30, weight='bold')
-    plt.xticks(fontsize=16, rotation=70, weight='bold')
-    plt.yticks(fontsize=16, weight='bold')
-    plt.tight_layout()
-    plt.show()
+    nb.pickle_model()
+    # fig, ax = plt.subplots(figsize=(12,12))
+    # plt.rcParams.update({'font.size': 20})
+    # nb.confusion_matrix_plot(ax)
+    # ax.set_xlabel('Predicted Label', fontsize=20, weight='bold')
+    # ax.set_ylabel('True Label', fontsize=20, weight='bold')
+    # ax.set_title('Confusion Matrix', fontsize=30, weight='bold')
+    # plt.xticks(fontsize=16, rotation=70, weight='bold')
+    # plt.yticks(fontsize=16, weight='bold')
+    # plt.tight_layout()
+    # plt.show()
 
     # ngrams = []
     # max_grams = 7

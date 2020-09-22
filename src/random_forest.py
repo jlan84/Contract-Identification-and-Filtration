@@ -71,7 +71,7 @@ class RandomForest():
         self.test_pipe.word_condenser()
         self.holdout_pipe.word_condenser()
     
-    def tfidf(self, stem=False, lemmatize=False, max_features=None):
+    def tfidf(self, stem=False, lemmatize=False, max_features=None, ngram_range=(1,1)):
         """
         Calls the tf_vect method on each of the piplelines. It uses the original
         string with stop words removed.  If stem == True then it uses a stemmed
@@ -85,27 +85,36 @@ class RandomForest():
         
         if not stem and not lemmatize:
             self.train_pipe.tf_vect(self.train_pipe.stops_removed_str,
-                                    max_features=max_features)
+                                    max_features=max_features,
+                                    ngram_range=ngram_range)
             self.test_pipe.tf_vect(self.test_pipe.stops_removed_str,
-                                   max_features=max_features)
+                                   max_features=max_features,
+                                   ngram_range=ngram_range)
             self.holdout_pipe.tf_vect(self.holdout_pipe.stops_removed_str,
-                                      max_features=max_features)
+                                      max_features=max_features,
+                                      ngram_range=ngram_range)
         elif stem:
             self.condense()
             self.train_pipe.tf_vect(self.train_pipe.porter_str,
-                                    max_features=max_features)
+                                    max_features=max_features,
+                                    ngram_range=ngram_range)
             self.test_pipe.tf_vect(self.test_pipe.porter_str,
-                                   max_features=max_features)
+                                   max_features=max_features,
+                                   ngram_range=ngram_range)
             self.holdout_pipe.tf_vect(self.holdout_pipe.porter_str,
-                                      max_features=max_features)
+                                      max_features=max_features,
+                                      ngram_range=ngram_range)
         elif lemmatize:
             self.condense()
             self.train_pipe.tf_vect(self.train_pipe.wordnet_str,
-                                    max_features=max_features)
+                                    max_features=max_features,
+                                    ngram_range=ngram_range)
             self.test_pipe.tf_vect(self.test_pipe.wordnet_str,
-                                   max_features=max_features)
+                                   max_features=max_features,
+                                   ngram_range=ngram_range)
             self.holdout_pipe.tf_vect(self.holdout_pipe.wordnet_str,
-                                      max_features=max_features)
+                                      max_features=max_features,
+                                      ngram_range=ngram_range)
         else:
             print('Cannot lemmatize and stem')
     
@@ -115,7 +124,7 @@ class RandomForest():
         the random forest model
         """
 
-        print('Generating Predictions from NB Model')
+        print('Generating Predictions from Naive Bayes Model')
 
         with open('nb_pickle.pkl', 'rb') as f:
             self.nb_model = pickle.load(f)
@@ -210,7 +219,7 @@ contractTxts/TrainTestHoldout/TestDocs/'
     rf = RandomForest(train_dir, test_dir, holdout_dir, stop_words)
     rf.convert_txt_to_lists()
     rf.remove_stop_words()
-    rf.tfidf(max_features=2000)
+    rf.tfidf(max_features=2000, ngram_range=(4,4))
     rf.add_nb_predictions()
     # rf.grid_search()
     # print(rf.best_params)
