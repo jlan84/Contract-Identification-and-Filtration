@@ -100,5 +100,5 @@ I started off by using a Naive Bayes Classifier model.  The initial model, using
 Below is the confusion matrix generated from the 4-word model.
 </br>
 <p align="center">
-<img src="images/train_test_split_workflow.png"  height="400" width="700" />
+<img src="images/chicago_confusion_whole_set.png"  height="700" width="700" />
 </p>
