@@ -260,7 +260,7 @@ if __name__ == "__main__":
     train_dir = '/Users/justinlansdale/Documents/Galvanize/Capstone2/\
 contractTxts/TrainTestHoldout/TrainTest/TrainDocs/'
     test_dir = '/Users/justinlansdale/Documents/Galvanize/Capstone2/\
-contractTxts/TrainTestHoldout/TestDocs/'
+contractTxts/TrainTestHoldout/TrainTest/TrainDocs/'
     
     start = time.time()
 

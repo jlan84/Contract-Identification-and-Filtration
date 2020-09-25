@@ -86,7 +86,7 @@ I started off by using a Naive Bayes Classifier model.  The initial model, using
 </br>
 
 
-### Class Report | Single 4 Words
+### Class Report | 4 Words
 |           |   Architectural Engineering |   Commodities |   Comptroller |   Construction |   Delegate Agency |   Professional Services |   accuracy |   macro avg |   weighted avg |
 |:----------|----------------------------:|--------------:|--------------:|---------------:|------------------:|------------------------:|-----------:|------------:|---------------:|
 | precision |                    0.916084 |      0.858108 |      0.92053  |       0.90303  |          0.972973 |                0.834483 |   0.901111 |    0.900868 |       0.900868 |
@@ -97,12 +97,9 @@ I started off by using a Naive Bayes Classifier model.  The initial model, using
 </br>
 </br>
 
-Below is the confusion matrix and a bar graph showing predictions generated from the 4-word model.
+Below is the confusion matrix showing predictions generated from the 4-word model.
 </br>
 <p align="center">
 <img src="images/chicago_confusion_whole_set.png"  height="700" width="700" />
 </p>
 </br>
-<p align="center">
-<img src="images/true_pos_barplot.png"  height="500" width="900" />
-</p>

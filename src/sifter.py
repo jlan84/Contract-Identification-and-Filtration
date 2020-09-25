@@ -49,8 +49,8 @@ class ContractSifter():
         the keys in the self.word_dic
 
         Returns
-        self.word_dic with a list of words with the following removed from each file in the
-        folder for that key:
+        self.word_dic with a list of words with the following removed from each 
+        file in the folder for that key:
             1. Stop words
             2. Punctuation
             3. Underscores
