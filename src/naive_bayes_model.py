@@ -175,7 +175,8 @@ class NaiveBayes():
             
         
 
-    def get_accuracy_classification_report(self, ngram_range=(1,1)):
+    def get_accuracy_classification_report(self, max_features=None,
+                                           ngram_range=(1,1)):
         """
         Prints out and returns the accuracy score from the prediction vs the actuals
         for the test set
@@ -188,7 +189,8 @@ class NaiveBayes():
         Returns
         Accuracy score for the model
         """
-        self.nb_pipeline = Pipeline([('vect', CountVectorizer(ngram_range=ngram_range)),
+        self.nb_pipeline = Pipeline([('vect', CountVectorizer(max_features=max_features,
+                                                              ngram_range=ngram_range)),
                             ('tfidf', TfidfTransformer()),
                             ('model', MultinomialNB()),
                             ])
@@ -276,8 +278,8 @@ contractTxts/TrainTestHoldout/TrainTest/TrainDocs/'
     # nb.vectorizer(ngram_range=(4,4))
     # nb.naive_bayes_model()
     # nb.return_top_n_words()
-    nb.get_accuracy_classification_report(ngram_range=(4,4))
-    nb.pickle_model()
+    nb.get_accuracy_classification_report(max_features=None, ngram_range=(4,4))
+    # nb.pickle_model()
     # fig, ax = plt.subplots(figsize=(12,12))
     # plt.rcParams.update({'font.size': 20})
     # nb.confusion_matrix_plot(ax)

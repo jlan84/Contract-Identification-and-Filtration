@@ -66,7 +66,7 @@ In order to generate the models, I needed to perform a proper train-test-split, 
 
 ## Naive Bayes Classifier
 
-I started off by using a Naive Bayes Classifier model.  The initial model, using a single word to generate the tfidf matrix gave an accuracy score of 86.2% and after tuning the model using a 4 word grouping the model achieved an accruacy of 90.1%.
+I started off by using a Naive Bayes Classifier model.  The initial model, using a 1-gram to generate the tfidf matrix gave an accuracy score of 86.2% and after tuning the model by removing common words and using a 4-gram grouping the model achieved an accruacy of 90.1%.
 
 </br>
 </br>
@@ -97,9 +97,21 @@ I started off by using a Naive Bayes Classifier model.  The initial model, using
 </br>
 </br>
 
-Below is the confusion matrix showing predictions generated from the 4-word model.
+Below is the confusion matrix showing predictions generated from the 4-gram model.
 </br>
 <p align="center">
 <img src="images/chicago_confusion_whole_set.png"  height="700" width="700" />
 </p>
 </br>
+
+
+## Random Forest
+
+Next I tried a Random Forest model to potentially improve the accuracy of the model. The baseline accuracy was only 38%, but after adding the predictions from the Naive Bayes model and using a 4-gram word grouping for the tfidf matrix the accuracy improved to 84%.  
+
+## Future Work
+
+1. Improve the dataset to include more relevant contracts
+2. Work on highlighting important contract features
+3. Web app
+4. Utilize unsupervized learning for topic modeling
