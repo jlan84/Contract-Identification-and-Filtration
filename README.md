@@ -107,7 +107,7 @@ Below is the confusion matrix showing predictions generated from the 4-gram mode
 
 ## Random Forest
 
-Next I tried a Random Forest model to potentially improve the accuracy of the model. The baseline accuracy was only 38%, but after adding the predictions from the Naive Bayes model and using a 4-gram word grouping for the tfidf matrix the accuracy improved to 84%.  
+Next I tried a Random Forest model to potentially improve the accuracy of the model. The baseline accuracy was only 38%, but after adding the predictions from the Naive Bayes model and using a 4-gram word grouping for the tfidf matrix, the accuracy improved to 83%.  
 
 ## Future Work
 
