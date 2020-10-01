@@ -112,6 +112,6 @@ Next I tried a Random Forest model to potentially improve the accuracy of the mo
 ## Future Work
 
 1. Improve the dataset to include more relevant contracts
-2. Work on highlighting important contract features
+2. Important feature filtration
 3. Web app
 4. Utilize unsupervized learning for topic modeling
