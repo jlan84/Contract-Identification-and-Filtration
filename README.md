@@ -13,7 +13,7 @@
 
 ## Introduction
 
-For normal everyday people, reading contracts is not the most appealing endeavor and we deal with them on a regular basis.  Whether it's agreeing to a new update on your smart phone or signing all of the documents when closing on a new home, few of us actually read through the contract to ensure we are not signing our lives away.  The ultimate goal of this project is to distinguish the important parts of a contract from the rest.
+For normal everyday people, reading contracts is not the most appealing endeavor and we deal with them on a regular basis.  Whether it's agreeing to a new update on your smart phone or signing all of the documents when closing on a new home, few of us actually read through the contract to ensure we are not signing our lives away. A relevant example of this is TikTok's Terms of Service Agreement, which is 51,000 words long and would take a proficient reader 3.5 hrs to finish reading, who wants to do that? Wouldn't it be nice if we had an application that could pull in a contract, classify it, parse out important sections, and recongnize when changes have been made?
 
 ## Process
 
@@ -69,8 +69,6 @@ In order to generate the models, I needed to perform a proper train-test-split, 
 I started off by using a Naive Bayes Classifier model.  The initial model, using a 1-gram to generate the tfidf matrix gave an accuracy score of 86.2% and after tuning the model by removing common words and using a 4-gram grouping the model achieved an accruacy of 90.1%.
 
 </br>
-</br>
-</br>
 
 
 ### Class Report | Single Word
@@ -107,7 +105,11 @@ Below is the confusion matrix showing predictions generated from the 4-gram mode
 
 ## Random Forest
 
-Next I tried a Random Forest model to potentially improve the accuracy of the model. The baseline accuracy was only 38%, but after adding the predictions from the Naive Bayes model and using a 4-gram word grouping for the tfidf matrix, the accuracy improved to 83%.  
+Next I tried a Random Forest model to potentially improve the accuracy of the model. The baseline accuracy was only 38%, but after adding the predictions from the Naive Bayes model and using a 4-gram word grouping for the tfidf matrix, the accuracy improved to 83%.
+
+## Change Recognition
+
+
 
 ## Future Work
 
