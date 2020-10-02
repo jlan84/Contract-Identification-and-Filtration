@@ -117,6 +117,7 @@ Another piece I incorporated into the contract classifier was the ability to rec
 </br>
 
 
+
 ## Future Work
 
 1. Improve the dataset to include more relevant contracts
