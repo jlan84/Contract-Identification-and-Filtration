@@ -108,7 +108,13 @@ Below is the confusion matrix showing predictions generated from the 4-gram mode
 Next I tried a Random Forest model to potentially improve the accuracy of the model. The baseline accuracy was only 38%, but after adding the predictions from the Naive Bayes model and using a 4-gram word grouping for the tfidf matrix, the accuracy improved to 83%.
 
 ## Change Recognition
+Another piece I incorporated into the contract classifier was the ability to recognize changes made in a contract.  This will be added to the web application currently being developed and can identify a change or amendment and where it was made.
 
+</br>
+<p align="center">
+<img src="images/change_recognition.png"  height="400" width="700" />
+</p>
+</br>
 
 
 ## Future Work
