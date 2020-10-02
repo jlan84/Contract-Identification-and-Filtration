@@ -112,7 +112,7 @@ Another piece I incorporated into the contract classifier was the ability to rec
 
 </br>
 <p align="center">
-<img src="images/change_recognition.png"  height="400" width="700" />
+<img src="images/change_recognition2.png"  height="400" width="700" />
 </p>
 </br>
 
